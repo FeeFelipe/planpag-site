@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlanPag | Infraestrutura White Label de Pagamentos e Banking</title>
+  <style>
+    :root {
+      --yellow: #ffd400;
+      --yellow-dark: #f5b800;
+      --black: #0b0b0f;
+      --gray: #6b7280;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Inter, Arial, sans-serif; }
+    body { background: var(--light); color: var(--black); line-height: 1.6; }
+    header { background: rgba(255,255,255,0.92); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(12px); }
+    .container { width: min(1180px, 92%); margin: 0 auto; }
+    .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 900; letter-spacing: -1px; }
+    .brand img { width: 46px; height: 46px; border-radius: 12px; object-fit: contain; }
+    .brand span { color: var(--yellow-dark); }
+    .menu { display: flex; gap: 28px; font-size: 15px; font-weight: 700; }
+    .menu a { text-decoration: none; color: var(--black); }
+    .btn { background: var(--black); color: var(--white); padding: 12px 20px; border-radius: 999px; text-decoration: none; font-weight: 800; display: inline-block; }
+    .btn-yellow { background: var(--yellow); color: var(--black); }
+
+    .hero { padding: 96px 0 80px; background: radial-gradient(circle at top left, #fff1a8 0%, #ffffff 42%, #f8fafc 100%); }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 56px; align-items: center; }
+    .badge { display: inline-block; background: #fff2a8; color: #7c4a00; padding: 8px 14px; border-radius: 999px; font-weight: 900; font-size: 14px; margin-bottom: 22px; }
+    h1 { font-size: clamp(42px, 6vw, 74px); line-height: 0.95; letter-spacing: -3px; margin-bottom: 24px; }
+    .hero p { font-size: 20px; color: var(--gray); max-width: 640px; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-visual { background: var(--black); border-radius: 36px; padding: 36px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); color: var(--white); }
+    .hero-logo-box { background: linear-gradient(135deg, #ffe45c, #ffd400); border-radius: 34px; padding: 34px; display: grid; place-items: center; margin-bottom: 24px; }
+    .hero-logo-box img { width: min(280px, 100%); height: auto; object-fit: contain; }
+    .hero-visual h3 { font-size: 26px; line-height: 1.1; margin-bottom: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chips span { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.12); padding: 9px 12px; border-radius: 999px; font-size: 14px; }
+
+    section { padding: 76px 0; }
+    .section-title { max-width: 760px; margin-bottom: 36px; }
+    .section-title h2 { font-size: 42px; letter-spacing: -1.5px; margin-bottom: 12px; }
+    .section-title p { color: var(--gray); font-size: 18px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 26px; padding: 28px; transition: 0.2s ease; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.08); }
+    .featured { border: 2px solid var(--yellow); box-shadow: 0 16px 50px rgba(250, 204, 21, 0.16); }
+    .icon { width: 46px; height: 46px; border-radius: 15px; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-weight: 900; margin-bottom: 18px; }
+    .card h3 { font-size: 22px; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .card p { color: var(--gray); margin-bottom: 14px; }
+    .card ul { padding-left: 18px; color: var(--black); font-size: 14px; }
+
+    .dark-section { background: var(--black); color: var(--white); }
+    .dark-section .section-title p { color: #d1d5db; }
+    .dark-section .card { background: #15151b; border-color: #262632; color: var(--white); }
+    .dark-section .card p { color: #d1d5db; }
+    .dark-section .card ul { color: #f3f4f6; }
+
+    .portfolio-table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 24px; background: var(--white); border: 1px solid var(--border); }
+    .portfolio-table th, .portfolio-table td { text-align: left; padding: 18px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .portfolio-table th { background: #fff7c2; font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .portfolio-table tr:last-child td { border-bottom: none; }
+
+    .cta { text-align: center; background: var(--yellow); border-radius: 38px; padding: 64px 28px; }
+    .cta h2 { font-size: 46px; letter-spacing: -2px; margin-bottom: 16px; }
+    .cta p { font-size: 18px; color: #3f3f46; margin-bottom: 28px; }
+    footer { padding: 36px 0; color: var(--gray); font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .cards { grid-template-columns: 1fr; }
+      .menu { display: none; }
+      .hero { padding-top: 64px; }
+      .portfolio-table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="planpag-logo.png" alt="PlanPag" />
+        Plan<span>Pag</span>
+      </div>
+      <nav class="menu">
+        <a href="#foco">Produtos foco</a>
+        <a href="#plataforma">Plataforma</a>
+        <a href="#todos">Todos produtos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="btn" href="#contato">Falar com especialista</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">White Label • Banking • Checkout • Antifraude</span>
+          <h1>Infraestrutura financeira para criar sua fintech, subadquirente ou checkout.</h1>
+          <p>A PlanPag combina pagamentos, banking, open finance, antifraude e IA em uma plataforma white label para empresas que querem lançar produtos financeiros com sua própria marca.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#foco">Ver produtos foco</a>
+            <a class="btn btn-yellow" href="#todos">Ver portfólio completo</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-logo-box">
+            <img src="planpag-logo.png" alt="Logo PlanPag" />
+          </div>
+          <h3>Uma camada completa para vender, receber, validar risco e operar banking.</h3>
+          <div class="chips">
+            <span>Subadquirência</span>
+            <span>Banking</span>
+            <span>AI Checkout</span>
+            <span>Fraude</span>
+            <span>Open Finance</span>
+            <span>APIs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="foco">
+      <div class="container">
+        <div class="section-title">
+          <h2>Produtos foco</h2>
+          <p>O núcleo da PlanPag: infraestrutura white label para pagamentos, banking, checkout inteligente, risco e open finance.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card featured">
+            <div class="icon">01</div>
+            <h3>Subadquirente Whitelabel</h3>
+            <p>Crie sua própria operação de adquirência com sua marca.</p>
+            <ul>
+              <li>Gestão de lojistas</li>
+              <li>Split de pagamento</li>
+              <li>Taxas e liquidação</li>
+            </ul>
+          </article>
+
+          <article class="card featured">
+            <div class="icon">02</div>
+            <h3>Bank Whitelabel</h3>
+            <p>Lance uma conta digital completa para seus clientes.</p>
+            <ul>
+              <li>Conta digital e Conta PJ</li>
+              <li>Pix e boleto</li>
+              <li>Cartão físico e virtual</li>
+            </ul>
+          </article>
+
+          <article class="card featured">
+            <div class="icon">03</div>
+            <h3>AI Bank Whitelabel</h3>
+            <p>Banco digital com inteligência embarcada para personalização, risco e crédito.</p>
+            <ul>
+              <li>Score dinâmico</li>
+              <li>Recomendação financeira</li>
+              <li>Automação com IA</li>
+            </ul>
+          </article>
+
+          <article class="card featured">
+            <div class="icon">04</div>
+            <h3>AI Checkout</h3>
+            <p>Checkout inteligente para vender mais com menos fricção.</p>
+            <ul>
+              <li>Cartão, Pix e boleto</li>
+              <li>Roteamento inteligente</li>
+              <li>Otimização de conversão</li>
+            </ul>
+          </article>
+
+          <article class="card featured">
+            <div class="icon">05</div>
+            <h3>Fraude & Risco</h3>
+            <p>Motor antifraude para análise transacional em tempo real.</p>
+            <ul>
+              <li>Score de risco</li>
+              <li>Regras customizadas</li>
+              <li>Device e comportamento</li>
+            </ul>
+          </article>
+
+          <article class="card featured">
+            <div class="icon">06</div>
+            <h3>Open Bank / Open Finance</h3>
+            <p>Conecte contas, dados e pagamentos usando open finance.</p>
+            <ul>
+              <li>Agregação de contas</li>
+              <li>Iniciação de pagamento</li>
+              <li>Enriquecimento de dados</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="plataforma" class="dark-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Por que PlanPag?</h2>
+          <p>Você não compra apenas meios de pagamento. Você constrói uma operação financeira completa, com marca própria e arquitetura pronta para escala.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="icon">A</div><h3>White Label real</h3><p>Produto com identidade da sua marca, não apenas uma integração genérica.</p><ul><li>App e web customizáveis</li><li>Fluxos por cliente</li><li>Operação multi-tenant</li></ul></article>
+          <article class="card"><div class="icon">B</div><h3>APIs first</h3><p>Integração por APIs, webhooks e módulos independentes.</p><ul><li>Pagamentos</li><li>Banking</li><li>Risco</li></ul></article>
+          <article class="card"><div class="icon">C</div><h3>IA aplicada</h3><p>IA para conversão, risco, atendimento e personalização financeira.</p><ul><li>Checkout inteligente</li><li>Fraude</li><li>Recomendações</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="todos">
+      <div class="container">
+        <div class="section-title">
+          <h2>Portfólio completo</h2>
+          <p>Todos os produtos continuam válidos, mas o posicionamento principal do site deve destacar a plataforma white label, banking, AI checkout, fraude e open finance.</p>
+        </div>
+
+        <table class="portfolio-table">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Produto</th>
+              <th>Descrição</th>
+              <th>Principais features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Pagamentos</td><td>Maquininha</td><td>Aceite pagamentos físicos.</td><td>Crédito, débito, contactless, chip</td></tr>
+            <tr><td>Pagamentos</td><td>Tap to Pay</td><td>Transforme celular ou iPhone em maquininha.</td><td>NFC, sem hardware, venda presencial</td></tr>
+            <tr><td>Pagamentos</td><td>Pix Taxa Zero</td><td>Recebimento instantâneo.</td><td>Pix ilimitado, QR Code, tempo real</td></tr>
+            <tr><td>Pagamentos</td><td>Pix por Aproximação</td><td>Pix via NFC.</td><td>Sem QR Code, rápido, presencial</td></tr>
+            <tr><td>Pagamentos</td><td>Pix Parcelado</td><td>Compre agora e pague depois.</td><td>Parcelamento, BNPL, aprovação rápida</td></tr>
+            <tr><td>Pagamentos</td><td>Cobrança Online</td><td>Receba via web.</td><td>Cartão, Pix, boleto</td></tr>
+            <tr><td>Pagamentos</td><td>Link de Pagamento</td><td>Venda à distância.</td><td>Compartilhamento, parcelamento, WhatsApp</td></tr>
+            <tr><td>Pagamentos</td><td>Checkout Transparente</td><td>Pagamento integrado no site.</td><td>API, tokenização, alta conversão</td></tr>
+            <tr><td>Pagamentos</td><td>Recorrência e Assinaturas</td><td>Cobranças automáticas.</td><td>Planos, ciclos, retentativas</td></tr>
+            <tr><td>Conta & Banking</td><td>Conta Digital</td><td>Soluções para seu dinheiro render mais.</td><td>Gestão financeira, saldo, integração</td></tr>
+            <tr><td>Conta & Banking</td><td>Conta PJ</td><td>Conta grátis e completa para empresas.</td><td>Sem mensalidade, Pix ilimitado, controle empresarial</td></tr>
+            <tr><td>Conta & Banking</td><td>Open Finance</td><td>Conecte dados e pagamentos.</td><td>Agregação, iniciação, enriquecimento de dados</td></tr>
+            <tr><td>Vendas & Gestão</td><td>ERP Restaurante</td><td>Gestão para food service.</td><td>Pedidos, cozinha, estoque</td></tr>
+            <tr><td>Vendas & Gestão</td><td>Gestão de Cobrança</td><td>Organize e automatize cobranças.</td><td>Notificações, inadimplência, automação</td></tr>
+            <tr><td>Plataforma & Infra</td><td>Subadquirente Whitelabel</td><td>Sua própria adquirente.</td><td>Split, taxas, lojistas</td></tr>
+            <tr><td>Plataforma & Infra</td><td>Bank Whitelabel</td><td>Crie sua fintech.</td><td>Conta, cartão, Pix</td></tr>
+            <tr><td>Plataforma & Infra</td><td>AI Bank</td><td>Banco com inteligência.</td><td>Score, recomendações, personalização</td></tr>
+            <tr><td>Plataforma & Infra</td><td>API de Pagamentos</td><td>Infraestrutura para desenvolvedores.</td><td>APIs REST, webhooks, multi-tenant</td></tr>
+            <tr><td>Segurança & IA</td><td>Antifraude PlanShield</td><td>Proteção transacional.</td><td>Score, regras, machine learning</td></tr>
+            <tr><td>Segurança & IA</td><td>Identidade & KYC PlanID</td><td>Validação de usuários.</td><td>OCR, biometria, compliance</td></tr>
+            <tr><td>Segurança & IA</td><td>AI Checkout Optimization</td><td>Aumente conversão.</td><td>Personalização, testes, redução de abandono</td></tr>
+            <tr><td>Segurança & IA</td><td>AI Fraud Engine</td><td>Motor inteligente de risco.</td><td>Análise comportamental, decisão em tempo real</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="cta">
+          <h2>Construa sua operação financeira com a PlanPag.</h2>
+          <p>Subadquirência, banking, AI checkout, antifraude e open finance em uma única plataforma white label.</p>
+          <a class="btn" href="mailto:contato@planpag.com.br">Quero conhecer</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 PlanPag. Todos os direitos reservados.
+    </div>
+  </footer>
+</body>
+</html>
